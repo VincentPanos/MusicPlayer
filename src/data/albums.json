@@ -1,5 +1,4 @@
-{
-	"albums": [{
+[{
 			"name": "Believe",
 			"artist": "Cher",
 			"mbid": "63b3a8ca-26f2-4e2b-b867-647a6ec2bebd",
@@ -350,4 +349,3 @@
 			}
 		}
 	]
-}
