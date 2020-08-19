@@ -1,8 +1,9 @@
-import {SET_ALBUMS, SET_SELECTED_ALBUM} from '../actionTypes';
+import {SET_ALBUMS, SET_SELECTED_ALBUM, SET_SELECTED_TRACK} from '../actionTypes';
 
 const initialState = {
     albums: [],
-    selectedAlbum: null
+    selectedAlbum: null,
+    selectedTrack: null
 };
 
 const albums = (state = initialState, action) => {
@@ -19,6 +20,13 @@ const albums = (state = initialState, action) => {
             return {
                 ...state,
                 selectedAlbum
+            }
+        }
+        case SET_SELECTED_TRACK: {
+            const {selectedTrack} = action.payload;
+            return {
+                ...state,
+                selectedTrack
             }
         }
         default: {

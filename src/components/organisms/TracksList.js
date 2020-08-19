@@ -16,9 +16,11 @@ const TracksList = (props) => {
     const {album} = props;
 
     return(
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
             <Grid item xs={12}>
-                <Button variant="outlined" color="primary" onClick={ ()=>dispatch(setSelectedAlbum(null))}><ArrowBackIosOutlinedIcon />Back to Albums</Button>
+                <Box style={{ paddingLeft:"20px"}}>
+                    <Button variant="outlined" color="primary" onClick={ ()=>dispatch(setSelectedAlbum(null))}><ArrowBackIosOutlinedIcon />Back to Albums</Button>
+                </Box>
             </Grid>
             <Grid item  xs={12}>
                 <AlbumProfile album={album} />
@@ -26,7 +28,12 @@ const TracksList = (props) => {
             <Grid item xs={12}>
                 <Box style={{ padding:"20px"}}>
                     <List dense={true}> 
-                        {album.tracks.track.map((track, index) =>{return (<TrackListItem track={track} index={index} />)})}
+                    { album.tracks && album.tracks.track && album.tracks.track.length > 0 ?
+                        album.tracks.track.map((track, index) =>{
+                             if (album.image) track.image = album.image;
+                            return (<TrackListItem track={track} index={index}  />)
+                        }):
+                        <span />}
                     </List>
                 </Box>
             </Grid>

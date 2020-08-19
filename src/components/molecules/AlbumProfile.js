@@ -10,7 +10,9 @@ const AlbumProfile = (props) =>{
     return (
         <Box style={{ padding:"20px"}}>
             <Paper  style={{ padding:"20px", textAlign:"center"}}>
-                <img alt="complex" src={album.image.find(element => element.size==="large")['#text']} />
+                {album.image && album.image.length > 0?
+                    <img alt="complex" src={album.image.find(element => element.size==="large")['#text']} />:
+                    <span />}
                 <Typography gutterBottom variant="h3">
                     {album.name}
                 </Typography>
@@ -18,7 +20,9 @@ const AlbumProfile = (props) =>{
                     {album.artist}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                    {album.tags.tag.reduce((accumulator, currentValue) => accumulator.concat(currentValue.name), []).join(', ')}
+                {album.tags && album.tags.tag && album.tags.tag.length > 0  ?
+                    album.tags.tag.reduce((accumulator, currentValue) => accumulator.concat(currentValue.name), []).join(', '):
+                    <span />}
                 </Typography>
             </Paper>
         </Box>

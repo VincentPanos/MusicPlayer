@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { setSelectedAlbum} from '../../redux/actions/albumsActions';
 
-
 const MusicListITem = (props) => {
 
     const {album} = props;
@@ -20,7 +19,10 @@ const MusicListITem = (props) => {
                 <Grid container spacing={2}>
                     <Grid item>
                         <Box style={{width: 128, height:128}}>
-                            <img style={{ maxWidth: '100%', maxHeight: '100%'}} alt="complex" src={album.image.find(element => element.size==="large")['#text']} />
+                            {album.image && album.image.length > 0 ?
+                                <img style={{ maxWidth: '100%', maxHeight: '100%'}} alt="complex" src={album.image.find(element => element.size==="large")['#text']} />
+                                :<span />
+                            }
                         </Box>
                     </Grid>
                     <Grid item xs={10} lg container>
@@ -33,11 +35,13 @@ const MusicListITem = (props) => {
                                     {album.artist}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {album.tags.tag.reduce((accumulator, currentValue) => accumulator.concat(currentValue.name), []).join(', ')}
+                                    {album.tags && album.tags.tag && album.tags.tag.length > 0 ?
+                                        album.tags.tag.reduce((accumulator, currentValue) => accumulator.concat(currentValue.name), []).join(', '):
+                                        <span />}
                                 </Typography>
                             </Grid>
                         </Grid>
-                        </Grid>
+                    </Grid>
                     <Grid item xs={2} lg container>
                         <Grid item container justify="flex-end" alignItems="center">
                             <Button variant="outlined" color="primary" onClick={ ()=>dispatch(setSelectedAlbum(album))}>View Album</Button>
