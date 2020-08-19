@@ -16,12 +16,12 @@ import TrackProfile from '../molecules/TrackProfile';
 const MusicPlayer = () => {
 
     const [status, setStatus] = useState(Sound.status.STOPPED);
-    const [playFromPosition, setPlayFromPosition]= useState(1);
+    const [position, setPosition] = useState(0);
     const track = useSelector(getSelectedTrack);
 
     useEffect ( () =>{
-        if (track ) {
-            setPlayFromPosition(0);
+        if (track) {
+            setPosition(0);
             setStatus(Sound.status.PLAYING);
         }
     }, [track])
@@ -47,7 +47,7 @@ const MusicPlayer = () => {
                     </Grid>
                 </Grid>
             </Paper>
-            <Sound url={song} playStatus={status} playFromPosition={playFromPosition}/>
+            <Sound url={song} playStatus={status} onPause ={ ({position}) => setPosition({position}.position)} playFromPosition={position}/>
         </Box>
     )
 }
